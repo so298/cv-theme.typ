@@ -1,0 +1,29 @@
+{
+  "name": "Typst Dev Container",
+  "image": "ghcr.io/so298/typst-devcontainer-images:extra-fonts",
+  "containerUser": "vscode",
+  "updateRemoteUserUID": true,
+  "workspaceFolder": "/home/vscode/workspace",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/home/vscode/workspace,type=bind,consistency=cached",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers-contrib/features/zsh-plugins": {
+      "plugins": 
+        "zsh-autosuggestions zsh-syntax-highlighting",
+      "omzPlugins": 
+        "https://github.com/zsh-users/zsh-autosuggestions.git https://github.com/zsh-users/zsh-syntax-highlighting.git"
+      ,
+      "username": "vscode"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "nvarner.typst-lsp",
+        "GitHub.copilot",
+        "GitHub.copilot-labs"
+      ]
+    }
+  },
+  "remoteUser": "vscode"
+}

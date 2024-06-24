@@ -1,0 +1,40 @@
+name: Build pdf and create release
+
+on:
+  push:
+    tags:
+      - "releases/*"
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build artifacts inside the container
+        run: |
+          for file in $(ls cv*.typ); do
+            docker run --rm -u root \
+              -v $PWD:/work \
+              -w /work \
+              ghcr.io/so298/typst-devcontainer-images:bare-extra-fonts \
+              typst compile $file
+          done
+
+      # This action requires *write* access to the repository
+      # Turn it on from the repository settings
+      - name: Create release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            *.pdf
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,32 @@
+name: Build and Upload
+
+on:
+  workflow_dispatch:
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build artifacts inside the container
+        run: |
+          for file in $(ls cv*.typ); do
+            docker run --rm -u root \
+              -v $PWD:/work \
+              -w /work \
+              ghcr.io/so298/typst-devcontainer-images:bare-extra-fonts \
+              typst compile $file
+          done
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: pdf
+          path: |
+            *.pdf
