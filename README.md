@@ -1,6 +1,6 @@
 # cv-theme.typ
 
-My CV template in [typst](https://typst.app/).
+My CV template for [typst](https://typst.app/).
 
 ## Requirements
 
@@ -36,3 +36,10 @@ $ typst watch <file>
 ## Automatic build pdf workflow
 
 This repository uses GitHub Actions to automatically build PDFs when you push a commit tagged with `releases/*`.
+
+> [!NOTE]
+> 
+> To enable this feature, add read and write permissions for github actions.
+>
+> Go to
+> `Settings > Actions > General > Workflow permission` and select `Read and write permissions`.
