@@ -1,5 +1,8 @@
 # cv-theme.typ
 
+> [!NOTE]
+> Example PDFs are available in the [Releases](https://github.com/so298/cv-theme.typ/releases) page.
+
 My CV template for [typst](https://typst.app/).
 
 ## Requirements
