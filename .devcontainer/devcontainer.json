@@ -19,7 +19,7 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "nvarner.typst-lsp",
+        "myriad-dreamin.tinymist",
         "GitHub.copilot",
         "GitHub.copilot-labs"
       ]
